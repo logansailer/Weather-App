@@ -8,21 +8,33 @@ get data I want
 display it on the page
 creative idea SUNSCREEN: calculate sunscreen with UV data
 */
+//gets default location to use on load
 const location = document.querySelector("#location").value;
-const today = document.querySelector("#today");
-const tempToday = document.querySelector("#temp-today");
 
 //uses variables to render data on page
-function renderPage() {}
+function renderPage(weatherObject) {
+  const today = (document.querySelector("#today").textContent = "Today is");
+  const tempToday = (document.querySelector("#temp-today").textContent =
+    weatherObject.tempF);
+  const feelsLike = (document.querySelector(
+    "#feels-like"
+  ).textContent = `Feels like: ${weatherObject.feelsLikeF}`);
+  const wind = (document.querySelector(
+    "#wind"
+  ).textContent = `Wind: ${weatherObject.windMPH} MPH`);
+  const uv = (document.querySelector(
+    "#uv"
+  ).textContent = `UV Index: ${weatherObject.uv}`);
+}
 
 //processes weather data to usable variables
 function weatherProcessor(weatherData) {
   const usableData = {
     condition: weatherData.current.condition.text,
-    feelsLikeF: weatherData.current.deelslike_f,
-    tempF: weatherData.current.temp_f,
+    feelsLikeF: Math.round(weatherData.current.feelslike_f),
+    tempF: Math.round(weatherData.current.temp_f),
     uv: weatherData.current.uv,
-    windMPH: weatherData.current.wind_mph,
+    windMPH: Math.round(weatherData.current.wind_mph),
     location: weatherData.location.name.toUpperCase(),
   };
 
@@ -45,8 +57,8 @@ async function getWeatherData(location) {
   );
   const weatherData = await response.json();
   console.log(weatherData);
-  const processedWeather = weatherProcessor(weatherData);
-  renderPage(processedWeather);
+  const weatherObject = weatherProcessor(weatherData);
+  renderPage(weatherObject);
 }
 
 getWeatherData(location);
