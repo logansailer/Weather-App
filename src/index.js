@@ -9,11 +9,14 @@ display it on the page
 creative idea SUNSCREEN: calculate sunscreen with UV data
 */
 //gets default location to use on load
-const location = document.querySelector("#location").value;
+const userLocation = document.querySelector("#get-location").value;
 
 //renders current weather info to the DOM
-function renderCurrent(weatherObject) {
-  const today = (document.querySelector("#today").textContent = "Today is");
+function renderWeather(weatherObject) {
+  const locationToday = (document.querySelector("#location").textContent =
+    weatherObject.location);
+  const conditionToday = (document.querySelector("#condition").textContent =
+    weatherObject.condition);
   const tempToday = (document.querySelector("#temp-today").textContent =
     weatherObject.tempF);
   const feelsLike = (document.querySelector(
@@ -28,7 +31,9 @@ function renderCurrent(weatherObject) {
 }
 
 //processes current weather data to usable variables
-function currentWeatherProcessor(weatherData) {
+function weatherProcessor(weatherData) {
+  const currentTime = new Date().getHours();
+  console.log(currentTime);
   const usableData = {
     condition: weatherData.current.condition.text,
     feelsLikeF: Math.round(weatherData.current.feelslike_f),
@@ -36,8 +41,13 @@ function currentWeatherProcessor(weatherData) {
     uv: weatherData.current.uv,
     windMPH: Math.round(weatherData.current.wind_mph),
     location: weatherData.location.name.toUpperCase(),
+    hour1: weatherData.forecast.forecastday[0].hour[currentTime + 1],
+    hour2: weatherData.forecast.forecastday[0].hour[currentTime + 2],
+    hour3: weatherData.forecast.forecastday[0].hour[currentTime + 3],
+    hour4: weatherData.forecast.forecastday[0].hour[currentTime + 4],
+    hour5: weatherData.forecast.forecastday[0].hour[currentTime + 5],
   };
-
+    console.log(usableData.hour5)
   if (weatherData.location.country === "United States of America") {
     usableData.region = weatherData.location.region.toUpperCase();
   } else {
@@ -48,62 +58,17 @@ function currentWeatherProcessor(weatherData) {
 }
 
 //fetches current weather data from api and sends to other functions for processing/display
-async function getCurrentData(location) {
+async function getWeatherData(location) {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=7bf9ad50d4414a82a2024440241203&q=${location}`,
+    `http://api.weatherapi.com/v1/forecast.json?key=7bf9ad50d4414a82a2024440241203&q=${location}`,
     {
       mode: "cors",
     }
   );
-  const currentWeatherData = await response.json();
-  console.log(currentWeatherData);
-  const currentWeatherObject = currentWeatherProcessor(currentWeatherData);
-  renderCurrent(currentWeatherObject);
+  const weatherData = await response.json();
+  console.log(weatherData);
+  const weatherObject = weatherProcessor(weatherData);
+  renderWeather(weatherObject);
 }
 
-//renders hourly info to the DOM
-function renderHourly(weatherObject) {
-  const today = (document.querySelector("#today").textContent = "Today is");
-  const tempToday = (document.querySelector("#temp-today").textContent =
-    weatherObject.tempF);
-  const feelsLike = (document.querySelector(
-    "#feels-like"
-  ).textContent = `Feels like: ${weatherObject.feelsLikeF}`);
-  const wind = (document.querySelector(
-    "#wind"
-  ).textContent = `Wind: ${weatherObject.windMPH} MPH`);
-  const uv = (document.querySelector(
-    "#uv"
-  ).textContent = `UV Index: ${weatherObject.uv}`);
-}
-
-//processes hourly weather data to usable variables
-function hourlyWeatherProcessor(weatherData) {
-  const usableData = {
-    condition: weatherData.current.condition.text,
-    feelsLikeF: Math.round(weatherData.current.feelslike_f),
-    tempF: Math.round(weatherData.current.temp_f),
-    uv: weatherData.current.uv,
-    windMPH: Math.round(weatherData.current.wind_mph),
-    location: weatherData.location.name.toUpperCase(),
-  };
-
-  return usableData;
-}
-
-//fetches hourly weather data from api and sends to other functions for processing/display
-async function getHourlyData(location) {
-  const response = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=7bf9ad50d4414a82a2024440241203&q=${location}`,
-    {
-      mode: "cors",
-    }
-  );
-  const hourlyData = await response.json();
-  console.log(hourlyData);
-  const hourlyWeatherObject = hourlyWeatherProcessor(hourlyData);
-  renderHourly(hourlyWeatherObject);
-}
-
-getCurrentData(location);
-getHourlyData(location);
+getWeatherData(userLocation);
