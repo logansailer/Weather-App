@@ -74,7 +74,7 @@ main {
   border-left: 1px solid white;
   display: grid;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
 }
 
 .info{
