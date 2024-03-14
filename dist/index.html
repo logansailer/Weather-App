@@ -4,15 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script src="main.js" defer></script>
   </head>
   <body>
     <header>
       <form>
-          <button id="submit">
-            <i class="fas fa-search"></i>
-          </button>
-          <input type="text" placeholder="Search City" id="get-location"/>
+        <input type="text" placeholder="Search City" id="get-location" />
+        <button id="submit">
+          <i class="fa fa-search"></i>
+        </button>
       </form>
     </header>
     <main>
@@ -20,9 +24,11 @@
         <h3 class="condition" id="condition"></h3>
         <h2 class="location" id="location"></h2>
         <h1 class="temp-today" id="temp-today"></h1>
-        <h4 class="info-today" id="feels-like"></h4>
-        <h4 class="info-today" id="wind"></h4>
-        <h4 class="info-today" id="uv"></h4>
+        <div class="info-today">
+          <h4 class="info" id="feels-like"></h4>
+          <h4 class="info" id="wind"></h4>
+          <h4 class="info" id="uv"></h4>
+        </div>
       </div>
       <div class="hourly" id="hourly">
         <div class="hour">

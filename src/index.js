@@ -32,7 +32,6 @@ function weatherProcessor(weatherData) {
   const currentTime = new Date(
     new Date().toLocaleString("en-US", { timeZone: weatherData.location.tz_id })
   ).getHours();
-  console.log(currentTime);
   const usableData = {
     condition: weatherData.current.condition.text,
     feelsLikeF: Math.round(weatherData.current.feelslike_f),
@@ -67,7 +66,6 @@ async function getWeatherData(location) {
     }
   );
   const weatherData = await response.json();
-  console.log(weatherData);
   const weatherObject = weatherProcessor(weatherData);
   renderWeather(weatherObject);
 }
