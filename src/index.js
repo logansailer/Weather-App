@@ -1,33 +1,34 @@
 import "./styles.css";
 
 /*
-set default data for app
-get data fromm user
-send it to api request
-get data I want
-display it on the page
 creative idea SUNSCREEN: calculate sunscreen with UV data
 */
+
 //gets default location to use on load
 const userLocation = document.querySelector("#get-location").value;
 
 //renders current weather info to the DOM
 function renderWeather(weatherObject) {
-  const locationToday = (document.querySelector("#location").textContent =
-    weatherObject.location);
-  const conditionToday = (document.querySelector("#condition").textContent =
-    weatherObject.condition);
-  const tempToday = (document.querySelector("#temp-today").textContent =
-    weatherObject.tempF);
-  const feelsLike = (document.querySelector(
+  document.querySelector(
+    "#location"
+  ).textContent = `${weatherObject.location}, ${weatherObject.region}`;
+  document.querySelector("#condition").textContent = weatherObject.condition;
+  document.querySelector("#temp-today").textContent = weatherObject.tempF;
+  document.querySelector(
     "#feels-like"
-  ).textContent = `Feels like: ${weatherObject.feelsLikeF}`);
-  const wind = (document.querySelector(
+  ).textContent = `Feels like: ${weatherObject.feelsLikeF}`;
+  document.querySelector(
     "#wind"
-  ).textContent = `Wind: ${weatherObject.windMPH} MPH`);
-  const uv = (document.querySelector(
-    "#uv"
-  ).textContent = `UV Index: ${weatherObject.uv}`);
+  ).textContent = `Wind: ${weatherObject.windMPH} MPH`;
+  document.querySelector("#uv").textContent = `UV Index: ${weatherObject.uv}`;
+  //iterates over each hour and dynamically adds to DOM
+  for (let i = 1; i < 6; i++) {
+    document.querySelector(`#temp-${i}`).textContent = Math.round(
+      weatherObject.hour[i].temp_f
+    );
+    document.querySelector(`#cond-${i}`).textContent =
+      weatherObject.hour[i].condition.text;
+  }
 }
 
 //processes current weather data to usable variables
@@ -41,13 +42,15 @@ function weatherProcessor(weatherData) {
     uv: weatherData.current.uv,
     windMPH: Math.round(weatherData.current.wind_mph),
     location: weatherData.location.name.toUpperCase(),
-    hour1: weatherData.forecast.forecastday[0].hour[currentTime + 1],
-    hour2: weatherData.forecast.forecastday[0].hour[currentTime + 2],
-    hour3: weatherData.forecast.forecastday[0].hour[currentTime + 3],
-    hour4: weatherData.forecast.forecastday[0].hour[currentTime + 4],
-    hour5: weatherData.forecast.forecastday[0].hour[currentTime + 5],
+    hour: {
+      1: weatherData.forecast.forecastday[0].hour[currentTime + 1],
+      2: weatherData.forecast.forecastday[0].hour[currentTime + 2],
+      3: weatherData.forecast.forecastday[0].hour[currentTime + 3],
+      4: weatherData.forecast.forecastday[0].hour[currentTime + 4],
+      5: weatherData.forecast.forecastday[0].hour[currentTime + 5],
+    },
   };
-    console.log(usableData.hour5)
+  //sets region based on in US vs outside US
   if (weatherData.location.country === "United States of America") {
     usableData.region = weatherData.location.region.toUpperCase();
   } else {

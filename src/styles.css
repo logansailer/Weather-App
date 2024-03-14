@@ -12,3 +12,7 @@ body {
 input {
   width: 5em;
 }
+
+.hourly{
+    display: grid;
+}
