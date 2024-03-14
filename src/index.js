@@ -1,11 +1,7 @@
 import "./styles.css";
-
 /*
 creative idea SUNSCREEN: calculate sunscreen with UV data
 */
-
-//gets default location to use on load
-const userLocation = document.querySelector("#get-location").value;
 
 //renders current weather info to the DOM
 function renderWeather(weatherObject) {
@@ -33,7 +29,9 @@ function renderWeather(weatherObject) {
 
 //processes current weather data to usable variables
 function weatherProcessor(weatherData) {
-  const currentTime = new Date().getHours();
+  const currentTime = new Date(
+    new Date().toLocaleString("en-US", { timeZone: weatherData.location.tz_id })
+  ).getHours();
   console.log(currentTime);
   const usableData = {
     condition: weatherData.current.condition.text,
@@ -74,4 +72,19 @@ async function getWeatherData(location) {
   renderWeather(weatherObject);
 }
 
-getWeatherData(userLocation);
+function getLocation() {
+  const userLocation =
+    document.querySelector("#get-location").value || "New York";
+  getWeatherData(userLocation);
+}
+
+function submitLocation(e) {
+  e.preventDefault();
+  getLocation();
+}
+
+const form = document.querySelector("form");
+const submit = document.querySelector("#submit");
+form.addEventListener("submit", submitLocation);
+submit.addEventListener("click", submitLocation);
+getLocation();

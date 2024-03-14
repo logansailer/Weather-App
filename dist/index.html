@@ -7,40 +7,49 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <input id="get-location" value="New York" />
-    <div class="todayDiv" id="todayDiv">
-      <h3 class="condition" id="condition"></h3>
-      <h2 class="location" id="location"></h2>
-      <h1 class="temp-today" id="temp-today"></h1>
-      <h4 class="info-today" id="feels-like"></h4>
-      <h4 class="info-today" id="wind"></h4>
-      <h4 class="info-today" id="uv"></h4>
-    </div>
-    <div class="hourly" id="hourly">
-      <div class="hour">
-        <h5 class="temp-hourly" id="temp-1"></h5>
-        <h6 class="cond-hourly" id="cond-1"></h6>
+    <header>
+      <form>
+          <button id="submit">
+            <i class="fas fa-search"></i>
+          </button>
+          <input type="text" placeholder="Search City" id="get-location"/>
+      </form>
+    </header>
+    <main>
+      <div class="todayDiv" id="todayDiv">
+        <h3 class="condition" id="condition"></h3>
+        <h2 class="location" id="location"></h2>
+        <h1 class="temp-today" id="temp-today"></h1>
+        <h4 class="info-today" id="feels-like"></h4>
+        <h4 class="info-today" id="wind"></h4>
+        <h4 class="info-today" id="uv"></h4>
       </div>
-      <div class="hour">
-        <h5 class="temp-hourly" id="temp-2"></h5>
-        <h6 class="cond-hourly" id="cond-2"></h6>
+      <div class="hourly" id="hourly">
+        <div class="hour">
+          <h5 class="temp-hourly" id="temp-1"></h5>
+          <h6 class="cond-hourly" id="cond-1"></h6>
+        </div>
+        <div class="hour">
+          <h5 class="temp-hourly" id="temp-2"></h5>
+          <h6 class="cond-hourly" id="cond-2"></h6>
+        </div>
+        <div class="hour">
+          <h5 class="temp-hourly" id="temp-3"></h5>
+          <h6 class="cond-hourly" id="cond-3"></h6>
+        </div>
+        <div class="hour">
+          <h5 class="temp-hourly" id="temp-4"></h5>
+          <h6 class="cond-hourly" id="cond-4"></h6>
+        </div>
+        <div class="hour">
+          <h5 class="temp-hourly" id="temp-5"></h5>
+          <h6 class="cond-hourly" id="cond-5"></h6>
+        </div>
       </div>
-      <div class="hour">
-        <h5 class="temp-hourly" id="temp-3"></h5>
-        <h6 class="cond-hourly" id="cond-3"></h6>
+      <div class="theme">
+        <h1 class="message"></h1>
       </div>
-      <div class="hour">
-        <h5 class="temp-hourly" id="temp-4"></h5>
-        <h6 class="cond-hourly" id="cond-4"></h6>
-      </div>
-      <div class="hour">
-        <h5 class="temp-hourly" id="temp-5"></h5>
-        <h6 class="cond-hourly" id="cond-5"></h6>
-      </div>
-    </div>
-    <div class="theme">
-      <h1 class="message"></h1>
-    </div>
-    <div class="week"></div>
+      <div class="week"></div>
+    </main>
   </body>
 </html>
