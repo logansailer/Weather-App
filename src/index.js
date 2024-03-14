@@ -87,6 +87,8 @@ function hourlyWeatherProcessor(weatherData) {
     windMPH: Math.round(weatherData.current.wind_mph),
     location: weatherData.location.name.toUpperCase(),
   };
+
+  return usableData;
 }
 
 //fetches hourly weather data from api and sends to other functions for processing/display
