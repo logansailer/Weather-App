@@ -9,19 +9,19 @@ function renderWeather(weatherObject) {
     "#location"
   ).textContent = `${weatherObject.location}, ${weatherObject.region}`;
   document.querySelector("#condition").textContent = weatherObject.condition;
-  document.querySelector("#temp-today").textContent = weatherObject.tempF;
+  document.querySelector("#temp-today").textContent = `${weatherObject.tempF}°`;
   document.querySelector(
     "#feels-like"
-  ).textContent = `Feels like: ${weatherObject.feelsLikeF}`;
+  ).textContent = `Feels like: ${weatherObject.feelsLikeF}°`;
   document.querySelector(
     "#wind"
   ).textContent = `Wind: ${weatherObject.windMPH} MPH`;
   document.querySelector("#uv").textContent = `UV Index: ${weatherObject.uv}`;
   //iterates over each hour and dynamically adds to DOM
   for (let i = 1; i < 6; i++) {
-    document.querySelector(`#temp-${i}`).textContent = Math.round(
+    document.querySelector(`#temp-${i}`).textContent = `${Math.round(
       weatherObject.hour[i].temp_f
-    );
+    )}°`;
     document.querySelector(`#cond-${i}`).textContent =
       weatherObject.hour[i].condition.text;
   }
