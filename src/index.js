@@ -3,6 +3,14 @@ import "./styles.css";
 creative idea SUNSCREEN: calculate sunscreen with UV data
 */
 
+/* need to do:
+fix bug where time stops working after 12
+dynamically add weather in seperate function */
+
+function sunWarning(uv) {
+  console.log(uv);
+}
+
 //renders current weather info to the DOM
 function renderWeather(weatherObject) {
   document.querySelector(
@@ -17,7 +25,7 @@ function renderWeather(weatherObject) {
     "#wind"
   ).textContent = `Wind: ${weatherObject.windMPH} MPH`;
   document.querySelector("#uv").textContent = `UV Index: ${weatherObject.uv}`;
-  document.querySelector('#warning').textContent = "You should probably wear sunscreen";
+  document.querySelector("#warning").textContent = sunWarning(weatherObject.uv);
   //iterates over each hour and dynamically adds to DOM
   for (let i = 1; i < 6; i++) {
     document.querySelector(`#time-${i}`).textContent =
