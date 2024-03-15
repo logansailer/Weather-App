@@ -17,6 +17,7 @@ function renderWeather(weatherObject) {
     "#wind"
   ).textContent = `Wind: ${weatherObject.windMPH} MPH`;
   document.querySelector("#uv").textContent = `UV Index: ${weatherObject.uv}`;
+  document.querySelector('#warning').textContent = "You should probably wear sunscreen";
   //iterates over each hour and dynamically adds to DOM
   for (let i = 1; i < 6; i++) {
     document.querySelector(`#time-${i}`).textContent =
