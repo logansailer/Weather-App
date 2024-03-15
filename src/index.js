@@ -18,7 +18,6 @@ function renderWeather(weatherObject) {
   ).textContent = `Wind: ${weatherObject.windMPH} MPH`;
   document.querySelector("#uv").textContent = `UV Index: ${weatherObject.uv}`;
   //iterates over each hour and dynamically adds to DOM
-  console.log(weatherObject);
   for (let i = 1; i < 6; i++) {
     document.querySelector(`#time-${i}`).textContent =
       weatherObject.hour[i].time.slice(11);
