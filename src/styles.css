@@ -78,7 +78,7 @@ main {
   align-items: center;
 }
 
-.info{
+.info {
   margin: 0 0 0 1em;
   font-size: 1.2em;
 }
@@ -88,4 +88,12 @@ main {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   margin: 5em;
   text-align: center;
+}
+
+.temp-hourly {
+  font-size: x-large;
+}
+
+.cond-hourly {
+  font-size: larger;
 }
