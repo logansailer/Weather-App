@@ -84,7 +84,7 @@ function weatherProcessor(weatherData) {
 //fetches current weather data from api and sends to other functions for processing/display
 async function getWeatherData(location) {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=7bf9ad50d4414a82a2024440241203&q=${location}`,
+    `https://api.weatherapi.com/v1/forecast.json?key=7bf9ad50d4414a82a2024440241203&q=${location}`,
     {
       mode: "cors",
     }
