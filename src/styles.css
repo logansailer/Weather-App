@@ -16,6 +16,10 @@ body {
 header {
   height: 5vh;
   width: 100%;
+}
+
+form {
+  width: 100%;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -111,12 +115,6 @@ main {
 }
 
 @media (width <= 1000px) {
-  .header {
-    margin: 0em;
-  }
-  i {
-    visibility: hidden;
-  }
   .todayDiv {
     margin: 1em;
     width: 95%;
