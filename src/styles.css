@@ -19,7 +19,7 @@ header {
 }
 
 form {
-  width: 100%;
+  padding: 1em;
   display: flex;
   flex-direction: row-reverse;
 }
@@ -115,6 +115,9 @@ main {
 }
 
 @media (width <= 1000px) {
+  *{
+    font-size: small;
+  }
   .todayDiv {
     margin: 1em;
     width: 95%;
